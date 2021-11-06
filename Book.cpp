@@ -13,41 +13,38 @@
 
 // Default and Conversion Constructor
 Book::Book(std::string title, std::string author, std::string isbn, double price)
-///////////////////////// TO-DO (2) //////////////////////////////
-{}
-/////////////////////// END-TO-DO (2) ////////////////////////////
+{
+/*
+  : _isbn{ std::move(isbn) },
+  _title{ std::move(title) },
+  _author{ std::move(author) },
+  _price { (price) }
+  {}
+*/
 
+    _title = title;
+    _author = author;
+    _isbn = isbn;
+    _price = price;
 
-
+}
 
 // Copy constructor
-Book::Book(Book const & other)
-///////////////////////// TO-DO (3) //////////////////////////////
-{}
-/////////////////////// END-TO-DO (3) ////////////////////////////
+Book::Book(Book const& other)
 
-
+    = default;
 
 
 // Copy Assignment Operator
-Book & Book::operator=(Book const & rhs) &
-///////////////////////// TO-DO (5) //////////////////////////////
-{}
-/////////////////////// END-TO-DO (5) ////////////////////////////
+Book& Book::operator=(Book const& rhs)&
 
+    = default;
 
 
 // Destructor
 Book::~Book() noexcept
-///////////////////////// TO-DO (7) //////////////////////////////
-{}
-/////////////////////// END-TO-DO (7) ////////////////////////////
 
-
-
-
-
-
+    = default;
 
 
 /*******************************************************************************
@@ -55,69 +52,62 @@ Book::~Book() noexcept
 *******************************************************************************/
 
 // isbn() const
-std::string const & Book::isbn() const &
+std::string const& Book::isbn() const&
 {
-	///////////////////////// TO-DO (8) //////////////////////////////
-	/////////////////////// END-TO-DO (8) ////////////////////////////
+    return _isbn;
 }
 
 
 
 
 // title() const
-std::string const & Book::title() const &
+std::string const& Book::title() const&
 {
-	///////////////////////// TO-DO (9) //////////////////////////////
-	/////////////////////// END-TO-DO (9) ////////////////////////////
+    return _title;
 }
 
 
 
 
 // author() const
-std::string const & Book::author() const &
+std::string const& Book::author() const&
 {
-	///////////////////////// TO-DO (10) //////////////////////////////
-	/////////////////////// END-TO-DO (10) ////////////////////////////
+    return _author;
 }
 
 
 
 // price() const
-double Book::price() const &
+double Book::price() const&
 {
-	///////////////////////// TO-DO (11) //////////////////////////////
-	/////////////////////// END-TO-DO (11) ////////////////////////////
+    return _price;
 }
 
 
 
 
 // isbn()
-std::string Book::isbn() &&
+std::string Book::isbn()&&
 {
-	///////////////////////// TO-DO (12) //////////////////////////////
-	/////////////////////// END-TO-DO (12) ////////////////////////////
+    return std::move(_isbn);
 }
 
 
 
 
 // title()
-std::string Book::title() &&
+std::string Book::title()&&
 {
-	///////////////////////// TO-DO (13) //////////////////////////////
-	/////////////////////// END-TO-DO (13) ////////////////////////////
+    return std::move(_title);
 }
 
 
 
 
 // author()
-std::string Book::author() &&
+std::string Book::author()&&
 {
-	///////////////////////// TO-DO (14) //////////////////////////////
-	/////////////////////// END-TO-DO (14) ////////////////////////////
+    return std::move(_author);
 }
 
 
@@ -132,40 +122,40 @@ std::string Book::author() &&
 *******************************************************************************/
 
 // isbn()
-Book & Book::isbn(std::string newIsbn) &
+Book& Book::isbn(std::string newIsbn)&
 {
-	///////////////////////// TO-DO (15) //////////////////////////////
-	/////////////////////// END-TO-DO (15) ////////////////////////////
+    _isbn = std::move(newIsbn);
+    return *this;
 }
 
 
 
 
 // title()
-Book & Book::title(std::string newTitle) &
+Book& Book::title(std::string newTitle)&
 {
-	///////////////////////// TO-DO (16) //////////////////////////////
-	/////////////////////// END-TO-DO (16) ////////////////////////////
+    _title = std::move(newTitle);
+    return *this;
 }
 
 
 
 
 // author()
-Book & Book::author(std::string newAuthor) &
+Book& Book::author(std::string newAuthor)&
 {
-	///////////////////////// TO-DO (17) //////////////////////////////
-	/////////////////////// END-TO-DO (17) ////////////////////////////
+    _author = std::move(newAuthor);
+    return *this;
 }
 
 
 
 
 // price()
-Book & Book::price(double newPrice) &
+Book& Book::price(double newPrice)&
 {
-	///////////////////////// TO-DO (18) //////////////////////////////
-	/////////////////////// END-TO-DO (18) ////////////////////////////
+    _price = std::move(newPrice);
+    return *this;
 }
 
 
@@ -176,58 +166,165 @@ Book & Book::price(double newPrice) &
 
 
 // operator==
-bool Book::operator==(const Book & rhs) const noexcept
+bool Book::operator==(const Book& rhs) const noexcept
 {
-	// All attributes must be equal for the two books to be equal to the other.  This can be done in any order, so put the quickest
-	// and then the most likely to be different first.
+    // All attributes must be equal for the two books to be equal to the other.  This can be done in any order, so put the quickest
+    // and then the most likely to be different first.
 
-	///////////////////////// TO-DO (20) //////////////////////////////
-	/////////////////////// END-TO-DO (20) ////////////////////////////
+    return _price == rhs._price && _isbn == rhs._isbn && _title == rhs._title && _author == rhs._author;
+
 }
 
 // operator!=
-bool Book::operator!=(const Book & rhs) const noexcept
+bool Book::operator!=(const Book& rhs) const noexcept
 {
-	// Two books are unequal if any of their attributes are unequal.
+    // Two books are unequal if any of their attributes are unequal.
 
-	///////////////////////// TO-DO (20) //////////////////////////////
-	/////////////////////// END-TO-DO (20) ////////////////////////////
+    return _price != rhs._price || _isbn != rhs._isbn || _title != rhs._title || _author != rhs._author;
+
 }
 
 // operator<
-bool Book::operator<(const Book & rhs) const noexcept
+bool Book::operator<(const Book& rhs) const noexcept
 {
-	// Books are ordered (sorted) by ISBN, author, title, then price.
+    // Books are ordered (sorted) by ISBN, author, title, then price.
 
-	///////////////////////// TO-DO (20) //////////////////////////////
-	/////////////////////// END-TO-DO (20) ////////////////////////////
+    bool compare = false;
+
+    if (isbn() == rhs.isbn())
+    {
+        if (author() == rhs.author())
+        {
+            if (title() == rhs.title())
+            {
+                if (price() < rhs.price())
+                {
+                    compare = true;
+                }
+            }
+            else if (title() < rhs.title())
+            {
+                compare = true;
+            }
+        }
+        else if (author() < rhs.author())
+        {
+            compare = true;
+        }
+    }
+    else if (isbn() < rhs.isbn())
+    {
+        compare = true;
+    }
+
+    return compare;
 }
 
 // operator<=
-bool Book::operator<=(const Book & rhs) const noexcept
+bool Book::operator<=(const Book& rhs) const noexcept
 {
-	// Books are ordered (sorted) by ISBN, author, title, then price.
+    // Books are ordered (sorted) by ISBN, author, title, then price.
 
-	///////////////////////// TO-DO (20) //////////////////////////////
-	/////////////////////// END-TO-DO (20) ////////////////////////////
+    bool compare = true;
+
+    if (isbn() == rhs.isbn())
+    {
+        if (author() == rhs.author())
+        {
+            if (title() == rhs.title())
+            {
+                if (price() > rhs.price())
+                {
+                    compare = false;
+                }
+            }
+            else if (title() > rhs.title())
+            {
+                compare = false;
+            }
+        }
+        else if (author() > rhs.author())
+        {
+            compare = false;
+        }
+    }
+    else if (isbn() > rhs.isbn())
+    {
+        compare = false;
+    }
+
+    return compare;
 }
 
 // operator>
-bool Book::operator>(const Book & rhs) const noexcept
+bool Book::operator>(const Book& rhs) const noexcept
 {
-	// Books are ordered (sorted) by ISBN, author, title, then price.
+    // Books are ordered (sorted) by ISBN, author, title, then price.
 
-	///////////////////////// TO-DO (20) //////////////////////////////
-	/////////////////////// END-TO-DO (20) ////////////////////////////
+    bool compare = false;
+
+    if (isbn() == rhs.isbn())
+    {
+        if (author() == rhs.author())
+        {
+            if (title() == rhs.title())
+            {
+                if (price() > rhs.price())
+                {
+                    compare = true;
+                }
+            }
+            else if (title() > rhs.title())
+            {
+                compare = true;
+            }
+        }
+        else if (author() > rhs.author())
+        {
+            compare = true;
+        }
+    }
+    else if (isbn() > rhs.isbn())
+    {
+        compare = true;
+    }
+
+    return compare;
 }
 
 // operator>=
-bool Book::operator>=(const Book & rhs) const noexcept
+bool Book::operator>=(const Book& rhs) const noexcept
 {
-	// Books are ordered (sorted) by ISBN, author, title, then price.
+    // Books are ordered (sorted) by ISBN, author, title, then price.
 
-	///////////////////////// TO-DO (20) //////////////////////////////
-	/////////////////////// END-TO-DO (20) ////////////////////////////
+    bool compare = true;
+    if (isbn() == rhs.isbn())
+    {
+        if (author() == rhs.author())
+        {
+            if (title() == rhs.title())
+            {
+                if (price() < rhs.price())
+                {
+                    compare = false;
+                }
+            }
+            else if (title() < rhs.title())
+            {
+                compare = false;
+            }
+        }
+        else if (author() < rhs.author())
+        {
+            compare = false;
+        }
+    }
+    else if (isbn() < rhs.isbn())
+    {
+        compare = false;
+    }
+
+    return compare;
 }
 
 
@@ -241,37 +338,65 @@ bool Book::operator>=(const Book & rhs) const noexcept
 *******************************************************************************/
 
 // operator>>
-std::istream & operator>>(std::istream & stream, Book & book)
+std::istream& operator>>(std::istream& stream, Book& book)
 {
-	///////////////////////// TO-DO (21) //////////////////////////////
-	/// A lot can go wrong when reading from streams - no permission, wrong types, end of file, etc. Minimal exception guarantee says
-	/// there should be no side affects if an error or exception occurs, so let's do our work in a local object and move it into place
-	/// at the end if all goes well.
-	///
-	/// This function should be symmetrical with operator<< below.  Read what your write, and write what you read
-	///
-	///
-	/// Assume fields are separated by commas and string attributes are enclosed with double quotes.  For example:
-	///    ISBN             | Title                 | Author             | Price
-	///    -----------------+-----------------------+--------------------+-----
-	///    "9789998287532",   "Over in the Meadow",   "Ezra Jack Keats",   91.11
-	///
-	///
-	/// Hint:  Use std::quoted to read and write quoted strings.  See
-	///        1) https://en.cppreference.com/w/cpp/io/manip/quoted
-	///        2) https://www.youtube.com/watch?v=Mu-GUZuU31A
+    /// A lot can go wrong when reading from streams - no permission, wrong types, end of file, etc. Minimal exception guarantee says
+    /// there should be no side affects if an error or exception occurs, so let's do our work in a local object and move it into place
+    /// at the end if all goes well.
+    ///
+    /// This function should be symmetrical with operator<< below.  Read what your write, and write what you read
+    ///
+    ///
+    /// Assume fields are separated by commas and string attributes are enclosed with double quotes.  For example:
+    ///    ISBN             | Title                 | Author             | Price
+    ///    -----------------+-----------------------+--------------------+-----
+    ///    "9789998287532",   "Over in the Meadow",   "Ezra Jack Keats",   91.11
+    ///
+    ///
+    /// Hint:  Use std::quoted to read and write quoted strings.  See
+    ///        1) https://en.cppreference.com/w/cpp/io/manip/quoted
+    ///        2) https://www.youtube.com/watch?v=Mu-GUZuU31A
 
 
-	/////////////////////// END-TO-DO (21) ////////////////////////////
+    std::string isbn, title, author;
+    char gap1, gap2, gap3;
+    double price;
+    stream >> std::quoted(isbn);
+    stream >> gap1;
+    book._isbn = isbn;
+    stream >> std::quoted(title);
+    stream >> gap2;
+    book._title = title;
+    stream >> std::quoted(author);
+    book._author = author;
+    stream >> gap3;
+    stream >> price;
+    book._price = price;
+    return stream;
+
 }
 
 
 
 
 // operator<<
-std::ostream & operator<<(std::ostream & stream, const Book & book)
+std::ostream& operator<<(std::ostream& stream, const Book& book)
 {
-	///////////////////////// TO-DO (22) //////////////////////////////
-	/// This function should be symmetrical with operator>> above.  Read what your write, and write what you read
-	/////////////////////// END-TO-DO (22) ////////////////////////////
+
+    /// This function should be symmetrical with operator>> above.  Read what your write, and write what you read
+    std::string isbn, title, author;
+    std::string gap = ",";
+    double price = 0.0;
+    isbn = book._isbn;
+    stream << std::quoted(isbn);
+    stream << gap;
+    title = book._title;
+    stream << std::quoted(title);
+    stream << gap;
+    author = book._author;
+    stream << std::quoted(author);
+    stream << gap;
+    price = book._price;
+    stream << price << "\n";
+    return stream;
 }
