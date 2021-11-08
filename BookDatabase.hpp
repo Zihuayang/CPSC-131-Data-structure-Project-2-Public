@@ -7,6 +7,7 @@
   /// functions, etc.  Only #include directives.
 
 #include <string>
+#include <iostream>
 
 #include "Book.hpp"
 /////////////////////// END-TO-DO (1) ////////////////////////////
@@ -42,6 +43,10 @@ class BookDatabase {
     /// Private implementation details.
     ///
     /// Add any necessary private helper functions, member attributes, etc.
+
+  std::vector<Book> _books_vector;
+
+  Book* find(const std::string& isbn, const std::vector<Book>::iterator& cur_pos);
 
   /////////////////////// END-TO-DO (2) ////////////////////////////
 };
