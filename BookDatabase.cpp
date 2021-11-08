@@ -8,6 +8,9 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
+
+
 /////////////////////// END-TO-DO (1) ////////////////////////////
 
 const std::string kDatabaseFilename = "database.txt";
@@ -45,6 +48,13 @@ BookDatabase::BookDatabase( const std::string & filename ) {
     /// that here. Read books until end of file, pushing each book into the data
     /// store as they are read.
 
+  Book _book;
+
+  while (fin >> _book)
+  {
+      _books_vector.push_back(_book);
+  }
+
   /////////////////////// END-TO-DO (2) ////////////////////////////
 
   // NOTE: The file is intentionally not explicitly closed. The file is closed
@@ -62,4 +72,32 @@ BookDatabase::BookDatabase( const std::string & filename ) {
   /// may be greater than the program's function call stack size. But for this
   /// programming exercise, getting familiar with recursion is a goal.
 
+Book* BookDatabase::find(const std::string& isbn)
+{
+    return find(isbn, _books_vector.begin());
+}
+
+Book* BookDatabase::find(const std::string& isbn, const std::vector<Book>::iterator& pos)
+{
+    if (pos == _books_vector.end())
+    {
+        return nullptr;
+    }
+
+    if (isbn == pos->isbn())
+    {
+        Book* book_ptr = new Book(*pos);
+        return book_ptr;
+    }
+
+    return find(isbn, pos + 1);
+}
+
+std::size_t BookDatabase::size() const
+{
+    return _books_vector.size();
+}
+
+
 /////////////////////// END-TO-DO (3) ////////////////////////////
+
