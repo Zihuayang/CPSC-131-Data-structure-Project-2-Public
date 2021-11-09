@@ -124,6 +124,21 @@ void Checkout::carefully_move_books(
   ///////////////////////// TO-DO (1) //////////////////////////////
     /// Implement the algorithm above.
 
+    if (quantity == 1)
+    {
+        working_cart.push(broken_cart.top());
+        broken_cart.pop();
+        trace(broken_cart, working_cart, spare_cart);
+    }
+    else
+    {
+        carefully_move_books(quantity - 1, broken_cart, spare_cart, working_cart);
+        working_cart.push(broken_cart.top());
+        broken_cart.pop();
+        trace(broken_cart, working_cart, spare_cart);
+        carefully_move_books(quantity - 1, spare_cart, working_cart, broken_cart);
+    }
+
   /////////////////////// END-TO-DO (1) ////////////////////////////
 }
 
@@ -142,6 +157,18 @@ void Checkout::shop_for_books() {
     ///      9780399576775    Eat pray love
     ///      9780545310581    Hunger Games            <===  heaviest book
 
+    Book one("Hunger Games", "", "9780545310581");
+    Book two("Eat pray love", "", "9780399576775");
+    Book three("Les Mis", "", "0140444300");
+    Book four("131 Answer Key", "", "54782169785");
+    Book five("Like the Animals", "", "9780895656926");
+
+    _my_cart.push(one);
+    _my_cart.push(two);
+    _my_cart.push(three);
+    _my_cart.push(four);
+    _my_cart.push(five);
+
   /////////////////////// END-TO-DO (2) ////////////////////////////
 }
 
@@ -150,6 +177,10 @@ void Checkout::switch_carts() {
     /// Carefully move the books in your now broken cart to this working cart by
     /// calling the CarefullyMoveBooks function.
 
+    std::stack<Book> _spare_cart;
+
+    carefully_move_books(5, _my_cart, _working_cart, _spare_cart);
+    
   /////////////////////// END-TO-DO (3) ////////////////////////////
 }
 
@@ -157,6 +188,12 @@ void Checkout::move_books_to_checkout() {
   ///////////////////////// TO-DO (4) //////////////////////////////
     /// Remove the books from your working cart and place them on the checkout
     /// counter, i.e., put them in this checkoutCounter queue.
+
+    while (!_working_cart.empty())
+    {
+        _checkout_counter.push(_working_cart.top());
+        _working_cart.pop();
+    }
 
   /////////////////////// END-TO-DO (4) ////////////////////////////
 }
@@ -170,6 +207,9 @@ void Checkout::do_checkout() {
     /// description and price to standard output).  Otherwise, print a message
     /// on the receipt that a description and price for the book wasn't found
     /// and there will be no charge.
+
+
+    
 
   /////////////////////// END-TO-DO (5) ////////////////////////////
 }
