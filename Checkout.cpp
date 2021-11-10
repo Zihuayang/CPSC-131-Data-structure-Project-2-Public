@@ -208,7 +208,25 @@ void Checkout::do_checkout() {
     /// on the receipt that a description and price for the book wasn't found
     /// and there will be no charge.
 
+    Book* book;
+    _amount_due = 0.00;
 
+    while (!_checkout_counter.empty())
+    {
+        book = _book_database.find(_checkout_counter.front().isbn());
+
+        if (book != nullptr)
+        {
+            std::cout << book << std::endl;
+            _amount_due += book->price();
+        }
+        else
+        {
+            std::cout << "There was price found for " << _checkout_counter.front().title() << ", so there is no charge." << std::endl;
+        }
+
+        _checkout_counter.pop();
+    }
     
 
   /////////////////////// END-TO-DO (5) ////////////////////////////
