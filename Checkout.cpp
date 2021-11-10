@@ -121,7 +121,7 @@ Checkout::Checkout() : _book_database( BookDatabase::instance() ) {}
 void Checkout::carefully_move_books(
     std::size_t quantity, std::stack<Book> & broken_cart,
     std::stack<Book> & working_cart, std::stack<Book> & spare_cart) {
-  ///////////////////////// TO-DO (1) //////////////////////////////
+
     /// Implement the algorithm above.
 
     if (quantity == 1)
@@ -139,11 +139,10 @@ void Checkout::carefully_move_books(
         carefully_move_books(quantity - 1, spare_cart, working_cart, broken_cart);
     }
 
-  /////////////////////// END-TO-DO (1) ////////////////////////////
 }
 
 void Checkout::shop_for_books() {
-  ///////////////////////// TO-DO (2) //////////////////////////////
+
     /// Put the following books into your cart with the heaviest book on the
     /// bottom and the lightest book on the top according to the ordering given
     /// in the table below. The author should be left empty. The price should
@@ -169,23 +168,23 @@ void Checkout::shop_for_books() {
     _my_cart.push(four);
     _my_cart.push(five);
 
-  /////////////////////// END-TO-DO (2) ////////////////////////////
+
 }
 
 void Checkout::switch_carts() {
-  ///////////////////////// TO-DO (3) //////////////////////////////
+
     /// Carefully move the books in your now broken cart to this working cart by
     /// calling the CarefullyMoveBooks function.
 
     std::stack<Book> _spare_cart;
 
     carefully_move_books(5, _my_cart, _working_cart, _spare_cart);
-    
-  /////////////////////// END-TO-DO (3) ////////////////////////////
+
+
 }
 
 void Checkout::move_books_to_checkout() {
-  ///////////////////////// TO-DO (4) //////////////////////////////
+
     /// Remove the books from your working cart and place them on the checkout
     /// counter, i.e., put them in this checkoutCounter queue.
 
@@ -195,11 +194,11 @@ void Checkout::move_books_to_checkout() {
         _working_cart.pop();
     }
 
-  /////////////////////// END-TO-DO (4) ////////////////////////////
+
 }
 
 void Checkout::do_checkout() {
-  ///////////////////////// TO-DO (5) //////////////////////////////
+
     /// For each book in the checkout counter queue, find the book by ISBN in
     /// the store's database.  If the book on the counter is found in the
     /// database then accumulate the amount due and print the book's full
@@ -227,9 +226,9 @@ void Checkout::do_checkout() {
 
         _checkout_counter.pop();
     }
-    
 
-  /////////////////////// END-TO-DO (5) ////////////////////////////
+
+
 }
 
 std::stack<Book> Checkout::my_cart() const {

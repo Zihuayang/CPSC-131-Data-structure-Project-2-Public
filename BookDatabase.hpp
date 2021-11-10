@@ -1,6 +1,6 @@
 #pragma once
 
-///////////////////////// TO-DO (1) //////////////////////////////
+
   /// Include necessary header files.
   ///
   /// Do not put anything else in this section, i.e. comments, classes,
@@ -8,9 +8,9 @@
 
 #include <string>
 #include <iostream>
-
+#include <vector>
 #include "Book.hpp"
-/////////////////////// END-TO-DO (1) ////////////////////////////
+
 
 // BookDatabase is an in-memory datastore, mapping ISBN numbers to Books.
 class BookDatabase {
@@ -24,7 +24,7 @@ class BookDatabase {
   Book * find( const std::string & isbn );
 
   // Returns the number of books in the database.
-  std::size_t size() const;                                                   
+  std::size_t size() const;
 
  private:
   // Constructs a BookDatabase using the data read from `filename`.
@@ -39,7 +39,7 @@ class BookDatabase {
   // Intentionally prohibit copy assignments.
   BookDatabase & operator=( const BookDatabase & rhs) = delete;
 
-  ///////////////////////// TO-DO (2) //////////////////////////////
+
     /// Private implementation details.
     ///
     /// Add any necessary private helper functions, member attributes, etc.
@@ -48,5 +48,5 @@ class BookDatabase {
 
   Book* find(const std::string& isbn, const std::vector<Book>::iterator& cur_pos);
 
-  /////////////////////// END-TO-DO (2) ////////////////////////////
+
 };

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="4" failures="0" disabled="0" errors="0" time="0.043" timestamp="2021-11-09T18:00:40" name="AllTests">
+  <testsuite name="CheckoutTestShopForBooks" tests="1" failures="0" disabled="0" errors="0" time="0.004" timestamp="2021-11-09T18:00:40">
+    <testcase name="Unused" status="run" result="completed" time="0.004" timestamp="2021-11-09T18:00:40" classname="CheckoutTestShopForBooks" />
+  </testsuite>
+  <testsuite name="CheckoutTestSwitchCarts" tests="1" failures="0" disabled="0" errors="0" time="0.028" timestamp="2021-11-09T18:00:40">
+    <testcase name="Unused" status="run" result="completed" time="0.028" timestamp="2021-11-09T18:00:40" classname="CheckoutTestSwitchCarts" />
+  </testsuite>
+  <testsuite name="CheckoutTestMoveBooksToCheckout" tests="1" failures="0" disabled="0" errors="0" time="0.007" timestamp="2021-11-09T18:00:40">
+    <testcase name="Unused" status="run" result="completed" time="0.007" timestamp="2021-11-09T18:00:40" classname="CheckoutTestMoveBooksToCheckout" />
+  </testsuite>
+  <testsuite name="CheckoutTestDoCheckout" tests="1" failures="0" disabled="0" errors="0" time="0.003" timestamp="2021-11-09T18:00:40">
+    <testcase name="Unused" status="run" result="completed" time="0.003" timestamp="2021-11-09T18:00:40" classname="CheckoutTestDoCheckout" />
+  </testsuite>
+</testsuites>

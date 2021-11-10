@@ -1,6 +1,5 @@
 #include "BookDatabase.hpp"
 
-///////////////////////// TO-DO (1) //////////////////////////////
   /// Include necessary header files.
   ///
   /// Do not put anything else in this section, i.e. comments, classes,
@@ -10,8 +9,6 @@
 #include <string>
 #include <vector>
 
-
-/////////////////////// END-TO-DO (1) ////////////////////////////
 
 const std::string kDatabaseFilename = "database.txt";
 
@@ -42,8 +39,7 @@ BookDatabase::BookDatabase( const std::string & filename ) {
   // NOTE: Double quotes within the string are escaped with the backslash
   // character.
   //
-  
-  ///////////////////////// TO-DO (2) //////////////////////////////
+
     /// HINT:  Use your Book's extraction operator to read Books, don't reinvent
     /// that here. Read books until end of file, pushing each book into the data
     /// store as they are read.
@@ -55,7 +51,6 @@ BookDatabase::BookDatabase( const std::string & filename ) {
       _books_vector.push_back(_book);
   }
 
-  /////////////////////// END-TO-DO (2) ////////////////////////////
 
   // NOTE: The file is intentionally not explicitly closed. The file is closed
   // when fin goes out of scope - for whatever reason. More precisely, the
@@ -63,7 +58,6 @@ BookDatabase::BookDatabase( const std::string & filename ) {
   // in the destructor. See RAII.
 }
 
-///////////////////////// TO-DO (3) //////////////////////////////
   /// Implement the rest of the interface, including functions find
   /// (recursively) and size.
   ///
@@ -86,8 +80,7 @@ Book* BookDatabase::find(const std::string& isbn, const std::vector<Book>::itera
 
     if (isbn == pos->isbn())
     {
-        Book* book_ptr = new Book(*pos);
-        return book_ptr;
+        return &(*pos);
     }
 
     return find(isbn, pos + 1);
@@ -97,7 +90,3 @@ std::size_t BookDatabase::size() const
 {
     return _books_vector.size();
 }
-
-
-/////////////////////// END-TO-DO (3) ////////////////////////////
-
